@@ -5,6 +5,7 @@ function MAIN()
     Local cCurso:= "Harbour/ADVPL"
 
     hb_cdpSelect("PT850") // formata‡Æo de texto
+    set date format "dd/mm/yyyy" // formata‡Æo de data
 
     QOut("=======================")
     QOut(" Ficha de Apresenta‡Æo")
@@ -12,7 +13,7 @@ function MAIN()
     QOut("Nome    : " + cNome)
     QOut("Cidade  : " + cCidade)
     QOut("Curso   : " + cCurso)
-    QOut("Data :" +  hb_ntos(Day(Date())),"/",CMonth(Date()),"/",Year(Date())) // fun‡Æo date(), separados em dia, mˆs e ano
-    QOut("Hora :" + Time()) // fun‡Æo que mostra o tempo
+    QOut("Data :" +  DToC(Date())) // fun‡Æo que mostra a data
+    QOut("Hora :" + Time()) // fun‡Æo que mostra a hora
     QOut("=======================")
 Return NIL
