@@ -8,7 +8,7 @@ Function Main()
     set date format "dd/mm/yyyy"
 
     ACCEPT "Informe o nome do cliente: " to nNomeCliente
-    ACCEPT "Informe a data de nascimento(ex. 10/04/2001): " to cData
+    ACCEPT "Informe a data de nascimento (ex. 10/04/2001): " to cData
     ACCEPT "Informe o pre‡o do produto (ex. 80.50): " to nPreco
 
     nPreco:= Val(nPreco)
