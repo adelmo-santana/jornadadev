@@ -1,6 +1,6 @@
 # Isto é um algoritmo válido?
 ## a. Some dois números. 
-**Válido**, pois o caminho é bem claro e é finito e não possui ambiguidade, seu fim é dado quando acabar de somar os dois números.
+**Não é válido**, pode até ser finito, mas não possui passos claros, podendo não conter os elementos requeridos para finalizar a operação, portanto ambíguo.
 
 ## b. Leia um número. Se for positivo, mostre ‘positivo’. Senão, mostre ‘negativo’.
 **Válido**, cumpre os três requisitos. é finito, ordenado e não tem ambuiguidade. Começa quando lê um número e termina quando é classificado positivo ou negativo.
