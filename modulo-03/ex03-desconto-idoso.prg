@@ -8,8 +8,8 @@ Function Main()
     set date format "dd/mm/yyyy"
 
     ACCEPT "Informe o nome do cliente: " to nNomeCliente
-    ACCEPT "Informe a data (ex. 10/04/2001): " to cData
-    ACCEPT "Informe o pre‡o do produto (ex. 80.50): " to nPreco
+    ACCEPT "Informe a data de nascimento(ex. 10/04/2001): " to cData
+    ACCEPT "Informe o preâ€¡o do produto (ex. 80.50): " to nPreco
 
     nPreco:= Val(nPreco)
     dDataNasci:= CToD(cData)
@@ -24,6 +24,6 @@ Function Main()
         nPreco:= nPreco*0.875
         QOut("Idade acima de 60, aplicando 12,5% :", AllTrim(Str(nPreco, 10, 2)))
     else
-        QOut("Pre‡o do Produto: ", AllTrim(Str(nPreco)))
+        QOut("Preâ€¡o do Produto: ", AllTrim(Str(nPreco)))
     end if
 Return NIL
