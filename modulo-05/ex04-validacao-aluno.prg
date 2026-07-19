@@ -1,0 +1,35 @@
+Function Main()
+
+    Local cNome, cMateria, nNota1, nNota2, nMedia
+    
+    hb_cdpSelect("PT850")
+
+    QOut("Valida��o de Aluno.")
+    QOut("Digite o nome do aluno, a m�teria (ex.: MAT, POR) e as duas notas.")
+
+    // enquanto o nome, materia e notas de um aluno forem corretas ele validara o cadastro do mesmo
+    while .T.
+        ACCEPT "Primeiramente, digite o nome: " to cNome
+        ACCEPT "Mat�ria: " to cMateria
+        ACCEPT "Primeira nota: " to nNota1
+        ACCEPT "Segunda nota: " to nNota2
+        nNota1:= val(nNota1)
+        nNota2:= val(nNota2)
+        
+        if Len(Trim(cNome)) > 0 .AND. Len(cMateria) == 3 .AND. cMateria == Upper(cMateria)
+            if nNota1 >=0 .AND. nNota1 <=10 .AND. nNota2 >=0 .AND. nNota2 <=10
+                nMedia:= (nNota1+nNota2)/2
+                QOut("Nome: ", cNome)
+                QOut("Mat�ria: ", cMateria)
+                QOut("M�dia: ", nMedia)  
+            else    
+                QOut("Nome, Mat�ria ou notas inv�lidas")  
+                exit
+            end if
+        else
+            QOut("Nome, Mat�ria ou notas inv�lidas")
+            exit
+        end if
+        exit
+    end do  
+Return NIL
