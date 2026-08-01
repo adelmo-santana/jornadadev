@@ -1,11 +1,52 @@
-# Gatilhos CEP
+# Gatilhos para o preenchimento automático de campos ao digitar o cep
 
-## Prints
+
+## Compilar o arquivo stcep.prw
+**Acesso ao DevStudios, compilar um arquivo disponibilizado pronto para uso:**
+
+![Compilando](./evidencias/ex07-gatilho-cepCompilar.png)
+
+## Configuração dos Gatilhos
+**ACESSO AO SIGACFG**: Confirmar credenciais > Base de Dados > Dicionário > Gatilhos: 
+
+Incluir gatilhos com o campo: A1_CEP com as seguintes regras: 
+
+### 1° Gatilho
+| Campo Origem | Sequência | Contra-domínio | Tipo | Regra de Execução | Posiciona |
+| :--- | :---: | :--- | :--- | :--- | :---: |
+| `A1_CEP` | `001` | `A1_BAIRRO` | Primario | `U_STCEP(M->A1_CEP,"BAIRRO")` | Não |
+
+
+![Gatilho 1](./evidencias/ex07-gatilho-cepGatilho1.png)
+
+### 2° Gatilho
+| Campo Origem | Sequência | Contra-domínio | Tipo | Regra de Execução | Posiciona |
+| :--- | :---: | :--- | :--- | :--- | :---: |
+| `A1_CEP` | `002` | `A1_MUN` | Primario | `U_STCEP(M->A1_CEP,"CIDADE")` | Não |
+
+![Gatilho 2](./evidencias/ex07-gatilho-cepGatilho2.png)
+
+### 3° Gatilho 
+
+| Campo Origem | Sequência | Contra-domínio | Tipo | Regra de Execução | Posiciona |
+| :--- | :---: | :--- | :--- | :--- | :---: |
+| `A1_CEP` | `003` | `A1_EST` | Primario | `U_STCEP(M->A1_CEP,"UF")` | Não |  
+
+![Gatilho 3](./evidencias/ex07-gatilho-cepGatinho3.png)
+
+
+
+## Antes de digitar:
+**Ainda permanece os dados antigos.** 
 
 ![Antes do CEP](./evidencias/ex07-antesCEP.png)
+
+## Depois de digitar:
+**Ao digitar o cep, os campos: Município, Bairro(Bairrozinho) e Estado são, automaticamente, preenchidos com referência ao cep.** 
+
 ![Depois do CEP](./evidencias/ex07-depoisCEP.png)
 
-
+# Questões 
 ## a. Qual a diferença entre campo, contra-domínio e regra num gatilho?
 
 Campo é onde começa o gatilho, ao sair com o tab depois de alterar, o gatilho é disparado.
