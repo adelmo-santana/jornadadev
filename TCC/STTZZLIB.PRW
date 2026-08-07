@@ -1,18 +1,18 @@
 #include "protheus.ch"
 
-//{Protheus.doc} NomeFornecedor
+//NomeFornecedor
 //Busca o nome do fornecedor na tabela SA2
 //
 USER FUNCTION NomeFornecedor(cFornec, cLoja)
 RETURN Posicione("SA2", 1, xFilial("SA2") + cFornec + cLoja, "A2_NOME")
 
-//{Protheus.doc} NomeProduto
+//NomeProduto
 //Busca a descrição do produto na tabela SB1
 //
 USER FUNCTION NomeProduto(cCodPro)
 RETURN Posicione("SB1", 1, xFilial("SB1") + cCodPro, "B1_DESC")
 
-//{Protheus.doc} PercNaoConforme
+//PercNaoConforme
 //Calcula a porcentagem de itens não conformes
 //
 USER FUNCTION PercNaoConforme(nOk, nNok)
@@ -22,7 +22,7 @@ USER FUNCTION PercNaoConforme(nOk, nNok)
     ENDIF
 RETURN (nNok / nTotal) * 100
 
-//{Protheus.doc} CertificadoVencendo
+// CertificadoVencendo
 //Retorna se o certificado vence em até 30 dias
 //
 USER FUNCTION CertificadoVencendo(dValCer)
