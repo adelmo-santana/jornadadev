@@ -11,7 +11,6 @@ USER FUNCTION STTZZ2FLT(cCodigoZZ1)
 RETURN NIL
 
 USER FUNCTION MontaBrowseZZ2(cAlias, lFiltrado, cCodigoZZ1)
-    // CORREÇÃO: Agrupamento correto das variáveis locais e privadas
     LOCAL cFilter    := ""
     LOCAL aIndexZZ2  := {}
     LOCAL aColors    := {;
