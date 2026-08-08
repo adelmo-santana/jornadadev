@@ -26,23 +26,33 @@ A Indústria XYZ enfrentava severas dificuldades devido ao controle descentraliz
 
 
 ```text
-TCC/
- ├── Dados-e-Dicionario/
- │ ├── sa2990.csv ← Fornecedores de teste
- │ ├── sb1990.csv ← Produtos de teste
- │ ├── sigacom.xnu ← Menu de Compras
- │ ├── six990.csv ← Dicionário de Índices
- │ ├── sx2990.csv ← Dicionário de Tabelas
- │ ├── sx3990.csv ← Dicionário de Campos
- │ ├── sx7990.csv ← Dicionário de Gatilhos
- │ ├── sxb990.csv ← Dicionário de Consultas
- │ ├── zz1990.csv ← Tabela ZZ1
- │ └── zz2990.csv ← Tabela ZZ2
- ├── evidencias/ ← prints das evidências 
- ├── TCC.PRJ ← Projeto DevStudio
- ├── STTZZ1.PRW ← Rotina mBrowse da ZZ1
- ├── STTZZ2.PRW ← Rotina mBrowse da ZZ2
- └── STTZZLIB.PRW ← Biblioteca de funções comuns
+tcc-adelmo-santana
+├── Dados-e-Dicionario/
+│ ├── converte-dicionario.prg ← utilitário de exportação
+│ ├── sa2990.csv
+│ ├── sb1990.csv
+│ ├── sigacom.xnu
+│ ├── six990.csv 
+│ ├── six990.dbf 
+│ ├── sx2990.csv
+│ ├── sx2990.dbf
+│ ├── sx3990.csv
+│ ├── sx3990.dbf
+│ ├── sxb7990.csv
+│ ├── sxb7990.dbf
+│ ├── sxb990.csv
+│ ├── sxb990.dbf
+│ ├── zz1990.csv
+│ ├── zz1990.dbf
+│ ├── zz2990.csv
+│ └── zz2990.dbf
+├── evidencias/ ← prints das telas funcionando(.png)
+├── fontes/
+│ ├── STTZZ1.PRW ← rotina mBrowse da ZZ1
+│ ├── STTZZ2.PRW ← rotina mBrowse da ZZ2
+│ └── STTZZLIB.PRW ← biblioteca de funções comuns
+├── AUTOAVALIACAO.md ← checklist 
+├── README.md 
 ```
 
 ### Componentes Chave da Solução:
@@ -61,6 +71,7 @@ TCC/
 |  7 | Tratamento de Erros com BEGIN SEQUENCE e Impedir Exclusão de ZZ1 se houver ZZ2 Vinculada |
 |  8 | Classe ADVPL – Programação Orientada a Objetos                                           |
 |  9 | Biblioteca STTZZLIB                                                                      |
+|  10 | Instalando o dicionário                                                                      |
 ---
 
 # 1. Tabela e Configuração ZZ1:  
@@ -470,3 +481,222 @@ RETURN oLogger:Salvar(cFuncao, oErro)
 | `U_BrowseNomeFor()` | Busca o nome do fornecedor com base nos campos ZZ2 para Browse. |
 | `U_CalcTotOk()` | Calcula o valor total dos itens conformes (Qtd OK * Vlr Unitário). |
 | `U_CalcTotNok()` | Calcula o valor total dos itens não conformes (Qtd NOK * Vlr Unitário). |
+
+# 10. Instalando o dicionário
+
+## Como Instalar o Dicionário de Dados
+
+Siga este procedimento para instalar o dicionário de dados utilizado pelo projeto no ambiente de testes do **TOTVS Protheus 8**.
+
+### Pré-requisitos
+
+Antes de iniciar a instalação, certifique-se de possuir:
+
+* Ambiente de testes **TOTVS Protheus 8** configurado e funcionando;
+* **AppServer** e **SmartClient** instalados;
+* **DevStudio** configurado para desenvolvimento e compilação ADVPL;
+* Acesso à pasta `system` do ambiente Protheus;
+* Acesso à pasta `data` do ambiente utilizado;
+* Permissão para substituir os arquivos de dicionário;
+* Arquivos do projeto disponíveis localmente.
+
+> **Importante:** este procedimento deve ser realizado somente em um ambiente de testes/homologação. Faça um backup dos arquivos existentes antes de substituí-los.
+
+---
+
+### 1 Copiar os arquivos do dicionário
+
+Primeiramente, encerre o **AppServer** do ambiente Protheus.
+
+Acesse a pasta `system` do ambiente de testes. Por exemplo:
+
+```text
+C:\totvs\protheus_data\system\
+```
+
+Copie para essa pasta os arquivos de dicionário disponibilizados no projeto.
+
+Os principais arquivos utilizados são:
+
+```text
+sx3990.dbf
+
+sx7990.dbf
+
+sxb990.dbf
+```
+
+Esses arquivos correspondem, respectivamente, aos campos do dicionário, gatilhos e consultas padrão utilizadas pelo projeto.
+
+#### `SX3990`
+
+Contém os campos utilizados pelas tabelas customizadas `ZZ1` e `ZZ2`.
+
+#### `SX7990`
+
+Contém os gatilhos e preenchimentos automáticos configurados para o projeto.
+
+#### `SXB990`
+
+Contém as consultas padrão utilizadas através do **F3**, incluindo as consultas de `ZZ1`, `SA2` e `SB1`.
+
+> Caso o sistema solicite a substituição dos arquivos existentes, confirme somente após verificar que foi realizado o backup do ambiente.
+
+---
+
+### 2 Atualizar os arquivos físicos das tabelas
+
+Depois de atualizar o dicionário, acesse a pasta onde estão armazenadas as tabelas físicas do ambiente.
+
+Exemplo:
+
+```text
+C:\totvs\protheus_data\data\
+```
+
+Localize os arquivos:
+
+
+```text
+zz1990.dbf
+zz2990.dbf
+```
+
+> **Atenção:** não exclua os arquivos `.DBF` caso eles contenham dados que precisem ser preservados.
+
+---
+
+### 3 Copiar o menu do projeto
+
+O projeto também possui o arquivo:
+
+```text
+sigacom.xnu
+```
+
+Copie esse arquivo para a pasta:
+
+```text
+C:\totvs\protheus_data\system\
+```
+
+substituindo o arquivo anterior, caso necessário.
+
+Esse arquivo disponibiliza no **SIGACOM** o grupo de menu:
+
+```text
+Controle ISO 9001
+```
+
+com as opções:
+
+```text
+Controle de Fornecimento
+Ocorrências de Fornecedores
+```
+
+---
+
+### 4 Iniciar o ambiente Protheus
+
+Após concluir a cópia dos arquivos:
+
+1. Inicie novamente o **AppServer**.
+2. Abra o **SmartClient**.
+3. Entre no ambiente de testes do Protheus.
+4. Acesse o módulo **Compras — SIGACOM**.
+
+Navegue até:
+
+```text
+Atualizações
+   └── Cadastros
+       └── Controle ISO 9001
+```
+
+Dentro do grupo deverão estar disponíveis:
+
+```text
+Controle de Fornecimento
+Ocorrências de Fornecedores
+```
+
+---
+
+## Instalação dos Fontes ADVPL
+
+Com o dicionário instalado, abra o **DevStudio** configurado para o ambiente Protheus 8.
+
+Adicione ou abra os seguintes fontes:
+
+```text
+STTZZLIB.PRW
+STTZZ1.PRW
+STTZZ2.PRW
+```
+
+O projeto também disponibiliza:
+
+```text
+TCC.PRJ
+```
+
+A biblioteca `STTZZLIB.PRW` deve ser compilada antes das demais rotinas, pois contém funções utilizadas pelos outros fontes.
+
+A ordem recomendada de compilação é:
+
+```text
+STTZZLIB.PRW
+       ↓
+STTZZ1.PRW
+       ↓
+STTZZ2.PRW
+```
+
+Após a compilação, reinicie o SmartClient se necessário e acesse novamente o **SIGACOM** para testar as rotinas.
+
+---
+
+## Ordem completa da instalação
+
+De forma resumida, o processo de instalação deve seguir esta sequência:
+
+```text
+1. Fazer backup do ambiente
+          ↓
+2. Desligar o AppServer
+          ↓
+3. Copiar SX3 / SX7 / SXB
+          ↓
+4. Atualizar ZZ1 e ZZ2
+          ↓
+5. Remover somente os .CDX antigos de ZZ1 e ZZ2
+          ↓
+6. Copiar sigacom.xnu
+          ↓
+7. Iniciar o AppServer
+          ↓
+8. Abrir o SmartClient
+          ↓
+9. Abrir o DevStudio
+          ↓
+10. Compilar STTZZLIB.PRW
+          ↓
+11. Compilar STTZZ1.PRW
+          ↓
+12. Compilar STTZZ2.PRW
+          ↓
+13. Acessar o SIGACOM
+          ↓
+14. Testar Controle de Fornecimento
+          ↓
+15. Testar Ocorrências de Fornecedores
+```
+
+## Observações importantes
+
+* O projeto foi desenvolvido e testado em ambiente **TOTVS Protheus 8**.
+* Os caminhos apresentados são exemplos e podem variar de acordo com a instalação do Protheus.
+* Sempre faça backup dos arquivos originais antes de substituí-los.
+* Os arquivos `.DBF` devem ser preservados caso contenham dados utilizados no ambiente.
+* A instalação deve ser realizada preferencialmente em um ambiente de **teste/homologação**, nunca diretamente em produção.
